@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Price Predictor</title>
+    <style>
+        body { font-family: Arial; margin: 50px; background: #f2f2f2; }
+        .container { background: white; padding: 30px; border-radius: 10px; width: 400px; margin: auto; }
+        h2 { text-align: center; }
+        input[type="text"], input[type="number"] {
+            width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            background: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer;
+        }
+        .result { margin-top: 20px; text-align: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Predict House Price</h2>
+        <form method="POST" action="/predict">
+            <label>Square Feet:</label>
+            <input type="text" name="square_feet" required>
+            <label>Bedrooms:</label>
+            <input type="number" name="bedrooms" required>
+            <label>Bathrooms:</label>
+            <input type="number" name="bathrooms" required>
+            <input type="submit" value="Predict">
+        </form>
+        {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+        <br><hr><br>
+        <div>
+            <h3>Model Coefficients </h3>
+            <p><strong>Intercept:</strong>₹{{ intercept | round(2) }}</p>
+        <ul>
+            {% for name, value in coefficients %}
+            <li><strong>{{ name }}:</strong> ₹{{ value | round(2) }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+</p>
+        </div>
+        {% endif %}
+        {% if error_message %}
+        {% endif %}
+    </div>
+</body>
+</html>
